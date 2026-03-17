@@ -6,7 +6,7 @@ import { ShoppingCart, Star, ArrowLeft, Package, Zap } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import toast from "react-hot-toast";
 
-const API = process.env.NEXT_PUBLIC_API_URL || "https://technosportpocapi.atinity.com";
+const API = (process.env.NEXT_PUBLIC_API_URL || "https://technosportpocapi.atinity.com").replace(/^http:\/\//, "https://");
 
 export default function ProductDetail() {
   const { id } = useParams();

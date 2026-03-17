@@ -5,7 +5,7 @@ import axios from "axios";
 import ProductCard from "@/components/ProductCard";
 import { Search, X, ChevronDown, Truck, RotateCcw, ShieldCheck } from "lucide-react";
 
-const API = process.env.NEXT_PUBLIC_API_URL || "https://technosportpocapi.atinity.com";
+const API = (process.env.NEXT_PUBLIC_API_URL || "https://technosportpocapi.atinity.com").replace(/^http:\/\//, "https://");
 
 const CATEGORIES = ["All", "Men", "Women", "Boys"];
 const SORTS = [
