@@ -4,16 +4,31 @@ const BACKEND = "https://technosportpocapi.atinity.com";
 
 async function handler(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
-  // Strip the leading /api prefix to get the real backend path
   const backendPath = pathname.replace(/^\/api/, "");
-  const url = `${BACKEND}${backendPath}${search}`;
+  let url = `${BACKEND}${backendPath}${search}`;
 
-  const res = await fetch(url, {
+  const body = req.method !== "GET" && req.method !== "HEAD" ? await req.text() : undefined;
+
+  // Follow redirects manually to preserve method (fetch changes POST→GET on 301)
+  let res = await fetch(url, {
     method: req.method,
     headers: { "Content-Type": "application/json" },
-    body: req.method !== "GET" && req.method !== "HEAD" ? await req.text() : undefined,
-    redirect: "follow",
+    body,
+    redirect: "manual",
   });
+
+  if (res.status === 301 || res.status === 302 || res.status === 307 || res.status === 308) {
+    const location = res.headers.get("location");
+    if (location) {
+      const redirectUrl = location.startsWith("http") ? location : `${BACKEND}${location}`;
+      res = await fetch(redirectUrl.replace(/^http:\/\//, "https://"), {
+        method: req.method,
+        headers: { "Content-Type": "application/json" },
+        body,
+        redirect: "follow",
+      });
+    }
+  }
 
   const data = await res.text();
   return new NextResponse(data, {

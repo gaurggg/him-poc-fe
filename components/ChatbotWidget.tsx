@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const API = process.env.NEXT_PUBLIC_API_URL || "https://technosportpocapi.atinity.com";
+const API = (process.env.NEXT_PUBLIC_API_URL || "https://technosportpocapi.atinity.com").replace(/^http:\/\//, "https://");
 
 interface Message {
   from: "user" | "bot";
