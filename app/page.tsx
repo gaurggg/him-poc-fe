@@ -29,7 +29,7 @@ function HomeContent() {
   const [category, setCategory] = useState(searchParams.get("category") || "All");
   const [sort, setSort] = useState(SORTS[0]);
   const [total, setTotal] = useState(0);
-  const debounceRef = useRef<ReturnType<typeof setTimeout>>();
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     setCategory(searchParams.get("category") || "All");
