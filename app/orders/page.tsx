@@ -5,7 +5,7 @@ import axios from "axios";
 import { Package, CheckCircle, Truck, Clock } from "lucide-react";
 import Link from "next/link";
 
-const API = process.env.NEXT_PUBLIC_API_URL || "https://technosportpocapi.atinity.com/";
+const API = process.env.NEXT_PUBLIC_API_URL || "https://technosportpocapi.atinity.com";
 
 const STATUS_CONFIG: Record<string, { color: string; bg: string; icon: React.ReactNode }> = {
   Confirmed:  { color: "#6366F1", bg: "rgba(99,102,241,0.1)",   icon: <CheckCircle size={12} /> },

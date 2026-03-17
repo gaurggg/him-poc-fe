@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import Link from "next/link";
 
-const API = process.env.NEXT_PUBLIC_API_URL || "https://technosportpocapi.atinity.com/";
+const API = process.env.NEXT_PUBLIC_API_URL || "https://technosportpocapi.atinity.com";
 
 export default function CartPage() {
   const { items, removeItem, updateQty, clearCart, totalItems, totalPrice } = useCart();
