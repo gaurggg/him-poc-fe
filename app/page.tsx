@@ -29,14 +29,14 @@ function HomeContent() {
   const [category, setCategory] = useState(searchParams.get("category") || "All");
   const [sort, setSort] = useState(SORTS[0]);
   const [total, setTotal] = useState(0);
-  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
     setCategory(searchParams.get("category") || "All");
   }, [searchParams]);
 
   useEffect(() => {
-    clearTimeout(debounceRef.current);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(fetchProducts, 300);
   }, [search, category, sort]);
 
